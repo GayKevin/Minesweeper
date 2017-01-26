@@ -72,7 +72,6 @@ public class LevelGenerator {
 
             for (int i = 0; i < gridX; i++) {
                 bw.write(grid[i] + "\n");
-                bw.newLine();
             }
 
             bw.close();
