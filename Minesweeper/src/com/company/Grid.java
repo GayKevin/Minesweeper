@@ -17,6 +17,7 @@ class Grid {
 
     private String[] gridFile;
     private char[][] resetGrid;
+    private final int mines = 10;
 
     Grid() {
         getMapFromFile();
@@ -57,6 +58,7 @@ class Grid {
     }
 
     private void showGrid() {
+        System.out.println(this.mines + " mines left.");
         System.out.println("  123456789");
         for (int x = 0; x < 9; x++) {
             System.out.print(gridYLetter[x] + " ");
