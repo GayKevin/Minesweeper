@@ -11,6 +11,7 @@ class Input {
     private boolean lose = false;
     private boolean reveal = false;
     private boolean flag = false;
+    private boolean win = false;
     private int xInput;
     private int yInput;
 
@@ -21,6 +22,8 @@ class Input {
     boolean getInput() {
         if (lose)
             return getLoseInput();
+        else if (win)
+                getWin();
         else
             getMenuInput();
 
@@ -60,6 +63,11 @@ class Input {
             }
         }
         return false;
+    }
+
+    private boolean getWin() {
+        System.out.println("You have found all the mines. Congratulation!");
+        return true;
     }
 
     private void getMenuInput() {
@@ -123,19 +131,23 @@ class Input {
         return reveal;
     }
 
-    public void setReveal(boolean reveal) {
+    void setReveal(boolean reveal) {
         this.reveal = reveal;
     }
 
-    public boolean isFlag() {
+    boolean isFlag() {
         return flag;
     }
 
-    public void setFlag(boolean flag) {
+    void setFlag(boolean flag) {
         this.flag = flag;
     }
 
-    public void setLose(boolean lose) {
+    void setLose(boolean lose) {
         this.lose = lose;
+    }
+
+    void setWin(boolean win) {
+        this.win = win;
     }
 }

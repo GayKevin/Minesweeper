@@ -10,6 +10,6 @@ public class MineSweeper {
 
     public static void main(String[] args) {
         Grid mines = new Grid();
-        System.out.println("Good bye my friend :(");
+        System.out.println("Thanks for playing, Good bye!");
     }
 }

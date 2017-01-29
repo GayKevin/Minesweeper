@@ -14,16 +14,16 @@ class Grid {
     private char[] gridYLetter = {
             'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'
     };
-
     private String[] gridFile;
     private char[][] resetGrid;
-    private final int mines = 10;
+    private int mines = 10;
+    private int flag = 15;
 
     Grid() {
         getMapFromFile();
         Input input = new Input();
         while (input.isPlay()) {
-            showGrid();
+            showGrid(input);
 
             if (input.getInput()) {
                 resetGrid();
@@ -37,6 +37,8 @@ class Grid {
                 flag(input);
                 input.setFlag(false);
             }
+
+            checkEndGame(input);
         }
     }
 
@@ -57,7 +59,8 @@ class Grid {
         }
     }
 
-    private void showGrid() {
+    private void showGrid(Input input) {
+        System.out.println(this.flag + " flag remaining.");
         System.out.println(this.mines + " mines left.");
         System.out.println("  123456789");
         for (int x = 0; x < 9; x++) {
@@ -103,7 +106,10 @@ class Grid {
     }
 
     private void flag(Input input) {
+        if (Objects.equals(gridFile[input.getXInput() - 1].charAt(input.getYInput() - 1), 'o'))
+            mines--;
         this.resetGrid[input.getXInput() - 1][input.getYInput() - 1] = 'F';
+        flag--;
     }
 
     private void resetGrid () {
@@ -114,5 +120,12 @@ class Grid {
             }
         }
         this.resetGrid = str;
+    }
+
+    private void checkEndGame(Input input){
+        if (this.flag == 0 && mines > 0)
+            input.setLose(true);
+        if (this.mines == 0)
+            input.setWin(true);
     }
 }
