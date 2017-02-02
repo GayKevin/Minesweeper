@@ -106,10 +106,17 @@ class Grid {
     }
 
     private void flag(Input input) {
-        if (Objects.equals(gridFile[input.getXInput() - 1].charAt(input.getYInput() - 1), 'o'))
+        if (Objects.equals(gridFile[input.getXInput() - 1].charAt(input.getYInput() - 1), 'o')
+                && Objects.equals(resetGrid[input.getXInput() - 1][input.getYInput() - 1], 'x')) {
             mines--;
-        this.resetGrid[input.getXInput() - 1][input.getYInput() - 1] = 'F';
-        flag--;
+            flag--;
+            this.resetGrid[input.getXInput() - 1][input.getYInput() - 1] = 'F';
+        } else if (Objects.equals(resetGrid[input.getXInput() - 1][input.getYInput() - 1], 'F')) {
+            this.resetGrid[input.getXInput() - 1][input.getYInput() - 1] = gridFile[input.getXInput() - 1].charAt(input.getYInput() - 1);
+            flag++;
+            if (Objects.equals(gridFile[input.getXInput() - 1].charAt(input.getYInput() - 1), 'o'))
+                mines++;
+        }
     }
 
     private void resetGrid () {
