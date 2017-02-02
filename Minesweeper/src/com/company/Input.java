@@ -19,6 +19,9 @@ class Input {
         this.sc = new Scanner(System.in);
     }
 
+    /**
+     * Determine what kind of input we have
+     */
     boolean getInput() {
         if (lose)
             return getLoseInput();
@@ -30,6 +33,9 @@ class Input {
         return false;
     }
 
+    /**
+     * Parse the input for the grid
+     */
     private void getGridInput() {
         String[] str;
 
@@ -45,6 +51,9 @@ class Input {
         }
     }
 
+    /**
+     * Input that appear when you lose and ask you if you want to play again or not
+     */
     private boolean getLoseInput() {
         String str;
         boolean correct = false;
@@ -65,11 +74,17 @@ class Input {
         return false;
     }
 
+    /**
+     * Display the message when you win
+     */
     private boolean getWin() {
         System.out.println("You have found all the mines. Congratulation!");
         return true;
     }
 
+    /***
+     * Determine in which input for the menu you have typed
+     */
     private void getMenuInput() {
         System.out.println(
                 "Minesweeper:\n" +
@@ -102,6 +117,10 @@ class Input {
         }
     }
 
+    /**
+     * Parse the input to determine if it's an integer or not
+     * @param str
+     */
     private boolean isInteger(String str) {
         try {
             Integer.parseInt(str);

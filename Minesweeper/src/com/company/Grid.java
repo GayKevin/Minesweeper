@@ -19,6 +19,9 @@ class Grid {
     private int mines = 10;
     private int flag = 15;
 
+    /**
+     * Consctrutor of Grid that stays active while you are on the game
+     */
     Grid() {
         getMapFromFile();
         Input input = new Input();
@@ -42,6 +45,9 @@ class Grid {
         }
     }
 
+    /**
+     * Parse the map from a file Mines.txt
+     */
     private void getMapFromFile() {
         int x = 0;
         int rc = 0;
@@ -59,6 +65,10 @@ class Grid {
         }
     }
 
+    /**
+     * Display the grid on the terminal
+     * @param input
+     */
     private void showGrid(Input input) {
         System.out.println(this.flag + " flag remaining.");
         System.out.println(this.mines + " mines left.");
@@ -73,10 +83,22 @@ class Grid {
         }
     }
 
+    /**
+     * Check if it has a mine inside the case
+     * @param xInput
+     * @param yInput
+     * @return
+     */
     private boolean checkBoundCaseUser(int xInput, int yInput){
         return 'o' == gridFile[xInput].charAt(yInput);
     }
 
+    /**
+     * Find mines near the input typed by the user
+     * @param xInput
+     * @param yInput
+     * @return
+     */
     private int findNearbyBounds(int xInput, int yInput) {
         int nbrBounds = 0;
 
@@ -93,6 +115,10 @@ class Grid {
         return nbrBounds;
     }
 
+    /**
+     * Show the case that the user have typed
+     * @param input
+     */
     private void reveal(Input input)  {
         int xInput = input.getXInput() -1;
         int yInput = input.getYInput() -1;
@@ -105,6 +131,10 @@ class Grid {
         }
     }
 
+    /**
+     * Flag and Unflag a case
+     * @param input
+     */
     private void flag(Input input) {
         if (Objects.equals(gridFile[input.getXInput() - 1].charAt(input.getYInput() - 1), 'o')
                 && Objects.equals(resetGrid[input.getXInput() - 1][input.getYInput() - 1], 'x')) {
@@ -119,6 +149,9 @@ class Grid {
         }
     }
 
+    /**
+     * Reset the grid from the beginning of the game
+     */
     private void resetGrid () {
         char[][] str = new char[9][9];
         for (int x = 0; x < 9; x++) {
@@ -129,6 +162,10 @@ class Grid {
         this.resetGrid = str;
     }
 
+    /**
+     * Check if the game is finsihed or not
+     * @param input
+     */
     private void checkEndGame(Input input){
         if (this.flag == 0 && mines > 0)
             input.setLose(true);
