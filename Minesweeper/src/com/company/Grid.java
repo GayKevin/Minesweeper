@@ -123,6 +123,9 @@ class Grid {
         int xInput = input.getXInput() -1;
         int yInput = input.getYInput() -1;
 
+        if (Objects.equals(resetGrid[input.getXInput() - 1][input.getYInput() - 1], 'F'))
+            return;
+
         if (checkBoundCaseUser(xInput, yInput)) {
             resetGrid[xInput][yInput] = 'o';
             input.setLose(true);
@@ -146,6 +149,9 @@ class Grid {
             flag++;
             if (Objects.equals(gridFile[input.getXInput() - 1].charAt(input.getYInput() - 1), 'o'))
                 mines++;
+        } else if (Objects.equals(resetGrid[input.getXInput() - 1][input.getYInput() - 1], 'x')) {
+            this.resetGrid[input.getXInput() - 1][input.getYInput() - 1] = 'F';
+            flag--;
         }
     }
 
