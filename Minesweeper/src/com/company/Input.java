@@ -79,6 +79,7 @@ class Input {
      */
     private boolean getWin() {
         System.out.println("You have found all the mines. Congratulation!");
+        System.exit(0);
         return true;
     }
 

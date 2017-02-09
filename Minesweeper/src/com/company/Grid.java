@@ -1,9 +1,8 @@
 package com.company;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.Objects;
+import java.util.Scanner;
 
 /**
  * Created by gay_k on 24/01/2017.
@@ -50,18 +49,22 @@ class Grid {
      */
     private void getMapFromFile() {
         int x = 0;
-        int rc = 0;
         String[] tmpGrid = new String[10];
+        File file = new File("../LevelGenerator/Mines.txt");
 
-        try (BufferedReader br = new BufferedReader(new FileReader("Mines.txt"))) {
-            while ((tmpGrid[x] = br.readLine()) != null) {
+        try {
+            Scanner sc = new Scanner(file);
+
+            while (sc.hasNext()) {
+            tmpGrid[x] = sc.next();
                 if (!(Objects.equals(tmpGrid[x], "")))
                     x++;
             }
             this.gridFile = tmpGrid;
             resetGrid();
-        } catch (IOException e) {
-            e.printStackTrace();
+
+            } catch (FileNotFoundException e1) {
+            e1.printStackTrace();
         }
     }
 
@@ -120,8 +123,11 @@ class Grid {
      * @param input
      */
     private void reveal(Input input)  {
-        int xInput = input.getXInput() -1;
-        int yInput = input.getYInput() -1;
+        int xInput = input.getXInput() - 1;
+        int yInput = input.getYInput() - 1;
+
+        if (xInput > 8 || xInput < 0 || yInput > 8 || yInput < 0)
+            return;
 
         if (Objects.equals(resetGrid[input.getXInput() - 1][input.getYInput() - 1], 'F'))
             return;
@@ -139,6 +145,8 @@ class Grid {
      * @param input
      */
     private void flag(Input input) {
+        if (input.getXInput() - 1 > 8 || input.getYInput() - 1 > 8)
+            return;
         if (Objects.equals(gridFile[input.getXInput() - 1].charAt(input.getYInput() - 1), 'o')
                 && Objects.equals(resetGrid[input.getXInput() - 1][input.getYInput() - 1], 'x')) {
             mines--;
